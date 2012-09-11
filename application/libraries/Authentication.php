@@ -236,6 +236,56 @@ class Authentication {
 
 
 	/**
+	 * Change password
+	 *
+	 * @access	public
+	 * @param	string [$password] The new password
+	 * @param	string [$user_identifier] The identifier of the user whos password will be changed, if none is set the current users password will be changed
+	 * @return	boolean Either TRUE or FALSE depending upon successful login
+	 */
+	public function change_password($password, $user_identifier = null)
+	{
+
+		// If no user identifier has been set
+		if ( ! $user_identifier)
+		{
+			// Ensure the current user is logged in
+			if ($this->is_loggedin())
+			{
+
+				// Read the user identifier
+				$user_identifier = $this->ci->session->userdata('identifier');
+
+			// There is no current logged in user
+			} else {
+				return FALSE;
+			}
+		}
+
+		// Generate salt
+		$salt = $this->generate_salt();
+
+		// Generate hash
+		$password = $this->generate_hash($password, $salt);
+
+		// Define data to update
+		$data = array(
+			$this->password_field => $password
+		);
+
+		// Update the users password
+		if ($this->ci->db->where($this->identifier_field, $user_identifier)->update($this->user_table, $data))
+		{
+			return TRUE;
+		// There was an error updating the user
+		} else {
+			return FALSE;
+		}
+
+	}
+
+
+	/**
 	 * Log a user out
 	 *
 	 * @access	public

@@ -3,7 +3,7 @@ Basic CodeIgniter Authentication
 
 A very simple library allowing users to be authenticated, there is no access level checking built in.
 
-### Install
+## Install
 
 To install the library copy:
 
@@ -20,15 +20,15 @@ Ensure you have setup an [encryption key] [1] and have configured CodeIgniter to
 
 You may then integrate the library into your code.
 
-### Setup
+## Setup
 
 You should have a look at the authentication configuration file, `application/config/authentication.php` and ensure all the details are correct, there should be adequate comments to help you out.
 
-### Loading the library
+## Loading the library
 
 Before you can use any of the methods listed below you must load the authentication library, you can do this in a number of ways, which I will discuss below.
 
-##### Controller Loading
+#### Controller Loading
 
 This is where you specify you would like to load the authentication library in each controller where you will use it, eg:
 
@@ -37,7 +37,7 @@ This is where you specify you would like to load the authentication library in e
 $this->load->library('authentication');
 ``` 
 
-##### Auto Loading
+#### Auto Loading
 
 This is where you specity the authentication library globally and you won't have to load it again, you do this by:
 
@@ -50,7 +50,7 @@ For example:
 $autoload['libraries'] = array('authentication');
 ```
 
-### Using the library
+## Using the library
 
 Once you've loaded the library, you can use the methods listed below, like this:
 
@@ -135,6 +135,22 @@ if ($this->authentication->is_loggedin())
 }
 ```
 
+### Change Password
+
+This method allows you to change the password for a user by passing the password and their identifier (as set in the configuation file.) You can also just pass the password and the current users password will be updated.
+
+```php
+// Read the password
+$new_password = $this->input->post('password');
+
+if ($this->authentication->change_password($new_password))
+{
+	// The users password HAS been updated
+} else {
+	// There was an ERROR updating the users password
+}
+```
+
 ### Logout
 
 When you call this method it will log the current user out, all other session data you set for the user will remain intact.
@@ -143,7 +159,7 @@ When you call this method it will log the current user out, all other session da
 $this->authentication->logout();
 ```
 
-### Credits
+## Credits
 
 [Joel Vardy] [3] for writing this.
 
