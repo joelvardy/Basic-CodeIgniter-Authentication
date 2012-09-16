@@ -159,6 +159,10 @@ When you call this method it will log the current user out, all other session da
 $this->authentication->logout();
 ```
 
+## Troubleshooting
+
+* You will encounter an error if you try to access the authentication library from a controller called "authentication"
+
 ## Credits
 
 [Joel Vardy] [3] for writing this.
