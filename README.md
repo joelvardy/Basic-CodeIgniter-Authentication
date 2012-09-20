@@ -175,6 +175,27 @@ if ($this->authentication->delete_user($user_identifier))
 }
 ```
 
+## Reading User Data
+
+It is likely you will want to retrieve data from the user table for the current user, for example the first name. this can be done easily by using the stored user identifier, you should ensure there is a logged in user first.
+
+In the example below we have a model called *user_m* which we will pass the user identifier to return the users details:
+
+```php
+// Ensure the current user is logged in
+if ($this->authentication->is_loggedin())
+{
+	// Load the user model
+	$this->load->model('user_m');
+
+	// Define the user identifier
+	$user_identifier = $this->ci->session->userdata('identifier')
+
+	// Define the user details
+	$user_details = $this->user_m->read($user_identifier);
+}
+```
+
 ## Troubleshooting
 
 * You will encounter an error if you try to access the authentication library from a controller called "authentication"
