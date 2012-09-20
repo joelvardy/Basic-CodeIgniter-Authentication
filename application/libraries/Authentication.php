@@ -310,6 +310,28 @@ class Authentication {
 	}
 
 
+	/**
+	 * Delete user account
+	 *
+	 * @access	public
+	 * @param	string [$user_identifier] The identifier of the user to delete
+	 * @return	boolean Either TRUE or FALSE depending upon successful login
+	 */
+	public function delete_user($user_identifier)
+	{
+
+		// Update the users password
+		if ($this->ci->db->where($this->identifier_field, $user_identifier)->delete($this->user_table))
+		{
+			return TRUE;
+		// There was an error deleting the user
+		} else {
+			return FALSE;
+		}
+
+	}
+
+
 }
 
 /* End of file Authentication.php */

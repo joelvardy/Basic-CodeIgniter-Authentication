@@ -159,6 +159,22 @@ When you call this method it will log the current user out, all other session da
 $this->authentication->logout();
 ```
 
+### Delete User
+
+This method will delete the user with the passed identifier (as set in the configuation file.)
+
+```php
+// Define user identifier
+$user_identifier = 1; // Using the ID column in the users table as the identifier
+
+if ($this->authentication->delete_user($user_identifier))
+{
+	// The user HAS been deleted
+} else {
+	// There was an ERROR deleting the user
+}
+```
+
 ## Troubleshooting
 
 * You will encounter an error if you try to access the authentication library from a controller called "authentication"
