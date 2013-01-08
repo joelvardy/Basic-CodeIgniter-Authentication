@@ -236,6 +236,67 @@ class Authentication {
 
 
 	/**
+	 * Read user details
+	 *
+	 * @access	public
+	 * @return	mixed or FALSE
+	 */
+	public function read($key)
+	{
+
+		// Only allow us to read certain data
+		switch ($key)
+		{
+			case 'identifier': {
+
+				// If the user is not logged in return false
+				if ( ! $this->is_loggedin()) return false;
+
+				// Return user identifier
+				return (int) $this->ci->session->userdata('identifier');
+
+				break;
+
+			}
+			case 'username': {
+
+				// If the user is not logged in return false
+				if ( ! $this->is_loggedin()) return false;
+
+				// Return username
+				return (string) $this->ci->session->userdata('username');
+
+				break;
+
+			}
+			case 'login': {
+
+				// If the user is not logged in return false
+				if ( ! $this->is_loggedin()) return false;
+
+				// Return time the user logged in at
+				return (int) $this->ci->session->userdata('logged_in');
+
+				break;
+
+			}
+			case 'logout': {
+
+				// Return time the user logged out at
+				return (int) $this->ci->session->userdata('logged_out');
+
+				break;
+
+			}
+		}
+
+		// If nothing has been returned yet
+		return false;
+
+	}
+
+
+	/**
 	 * Change password
 	 *
 	 * @access	public

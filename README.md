@@ -135,6 +135,22 @@ if ($this->authentication->is_loggedin())
 }
 ```
 
+### Read Details
+
+This method is a wrapper allowing you to access the data stored in the session (allowing the library to be updated without braking your code.) call this method with one of the following keys:
+
+ * identifier
+ * username
+ * login
+ * logout
+
+```php
+// Read the users identifier
+$user_id = $this->authentication->read('identifier');
+```
+
+While the logout time can be accessed when the current user is logged out, other requests will yield a boolean false if attempted while the user is logged out.
+
 ### Change Password
 
 This method allows you to change the password for a user by passing the password and their identifier (as set in the configuation file.) You can also just pass the password and the current users password will be updated.
